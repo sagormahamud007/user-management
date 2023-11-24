@@ -4,19 +4,25 @@ export type Taddress = {
     city: string;
     country: string;
 }
-export type Tname = {
+export type TUserFullName = {
     firstName: string;
     lastName: string
 }
+export type TOrders = {
+    productName: string;
+    price: number;
+    quantity: number
+}
 
-export type user = {
+export type TUser = {
     userId: number;
     username: string;
     password: string;
-    fullName: Tname;
+    fullName: TUserFullName;
     age: number;
     email: string;
     isActive: boolean,
     hobbies: [string, string],
-    address: Taddress
+    address: Taddress,
+    orders?: TOrders[]
 }
