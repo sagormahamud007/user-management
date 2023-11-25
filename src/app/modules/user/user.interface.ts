@@ -1,3 +1,6 @@
+import { Model } from "mongoose";
+import { userSchema } from "./user.model";
+
 //user-type-interface
 export type Taddress = {
     street: string;
@@ -9,9 +12,9 @@ export type TUserFullName = {
     lastName: string
 }
 export type TOrders = {
-    productName: string;
-    price: number;
-    quantity: number
+    productName?: string;
+    price?: number;
+    quantity?: number;
 }
 
 export type TUser = {
@@ -25,4 +28,7 @@ export type TUser = {
     hobbies: [string, string],
     address: Taddress,
     orders?: TOrders[]
+}
+export interface userModel extends Model<TUser> {
+    isUserExists(userId: number): Promise<TUser | null>
 }
