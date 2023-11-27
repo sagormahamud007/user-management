@@ -49,7 +49,27 @@ const getUserAllUsers = async (req: Request, res: Response) => {
     }
 }
 
+//step-3 => single user get spacific unic ID
+const getSIngleSpecificUser = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.userId;
+        const result = await userServices.getSingleSpecificUserIntoDB(id);
+        res.status(200).json({
+            success: true,
+            massage: "student found successfully",
+            data: result
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            massage: "user not found",
+            data: error
+        })
+    }
+}
+
 export const userControllers = {
     createUser,
-    getUserAllUsers
+    getUserAllUsers,
+    getSIngleSpecificUser
 }
