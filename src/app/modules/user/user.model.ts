@@ -1,5 +1,7 @@
 import { Schema, model } from "mongoose";
-import { TUserFullName, Taddress, TUser, TOrders, userModel } from "./user.interface";
+import { TUserFullName, Taddress, TUser, TOrders } from "./user.interface";
+import bcrypt from 'bcrypt';
+import config from "../../config";
 
 const userNameSchema = new Schema<TUserFullName>({
     firstName: {
@@ -26,7 +28,7 @@ const ordersSchema = new Schema<TOrders>({
     quantity: { type: Number }
 })
 
-export const userSchema = new Schema<TUser, userModel>({
+export const userSchema = new Schema<TUser>({
     userId: { type: Number, required: true, unique: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true, },
@@ -34,14 +36,22 @@ export const userSchema = new Schema<TUser, userModel>({
     age: { type: Number, required: true },
     email: { type: String, required: true },
     isActive: { type: Boolean, required: true },
-    hobbies: { type: [String], required: true },
+    hobbies: [{ type: String, required: true }],
     address: { type: userAddressSchema, required: true },
-    orders: { type: [ordersSchema] }
+    orders: { type: [ordersSchema] || undefined }
 })
 
-export const User = model<TUser, userModel>("User", userSchema)
+userSchema.pre('save', async function (next) {
+    this.password = await bcrypt.hash(
+        this.password,
+        Number(config.bcrypt_salt_rounds)
+    )
+    next()
+})
+userSchema.post('save', async function (doc, next) {
+    doc.password = ''
+    next()
+})
 
-userSchema.statics.isUserExists = async function () {
-    const existingUser = await User.findOne({ userId: Number })
-    return existingUser
-}
+
+export const User = model<TUser>("User", userSchema)

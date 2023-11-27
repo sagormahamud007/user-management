@@ -27,7 +27,7 @@ const userValidationSchema = z.object({
     age: z.number().int().positive("Age must be a positive number"),
     email: z.string().email('Invalid email formet'),
     isActive: z.boolean(),
-    hobbies: z.string(),
+    hobbies: z.array(z.string()),
     address: TAddressSchema.refine(value => !!value.street || !!value.city || !!value.country, {
         message: "At least one of the first street, city or quantity is required"
     }),

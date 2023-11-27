@@ -1,5 +1,3 @@
-import { Model } from "mongoose";
-import { userSchema } from "./user.model";
 
 //user-type-interface
 export type Taddress = {
@@ -25,10 +23,7 @@ export type TUser = {
     age: number;
     email: string;
     isActive: boolean,
-    hobbies: [string, string],
+    hobbies: string[],
     address: Taddress,
     orders?: TOrders[]
-}
-export interface userModel extends Model<TUser> {
-    isUserExists(userId: number): Promise<TUser | null>
 }
