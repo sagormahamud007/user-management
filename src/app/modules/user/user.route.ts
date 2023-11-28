@@ -6,5 +6,7 @@ const router = express.Router()
 router.post("/api/users", userControllers.createUser);
 router.get("/api/users", userControllers.getUserAllUsers);
 router.get("/api/users/:userId/orders", userControllers.getSIngleSpecificUser);
+router.put("/api/users/:userId", userControllers.updateSpacificUserData);
+router.delete("/api/users/:userId", userControllers.deletedSingleSpacificuUser);
 
 export const UsersRoutes = router;

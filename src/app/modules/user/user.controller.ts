@@ -37,7 +37,7 @@ const getUserAllUsers = async (req: Request, res: Response) => {
         const result = await userServices.getAllUsersIntoDB();
         res.status(200).json({
             success: true,
-            massage: "student found successfully",
+            massage: "Users fetched successfully!",
             data: result
         })
     } catch (error) {
@@ -56,7 +56,7 @@ const getSIngleSpecificUser = async (req: Request, res: Response) => {
         const result = await userServices.getSingleSpecificUserIntoDB(id);
         res.status(200).json({
             success: true,
-            massage: "student found successfully",
+            massage: "Users fetched successfully!",
             data: result
         })
     } catch (error) {
@@ -67,9 +67,77 @@ const getSIngleSpecificUser = async (req: Request, res: Response) => {
         })
     }
 }
+//step-4 => update spacific data 
+const updateSpacificUserData = async (req: Request, res: Response) => {
+    try {
+        const { userId } = req.params
+        const data = req.body;
+        const result = await userServices.updateUserSpecificIntoDB(userId, data);
+        if (result.modifiedCount === 1) {
+            const updateData = await userServices.getSingleSpecificUserIntoDB(data.userId);
+            res.status(200).json({
+                success: true,
+                massage: "User updated successfully!",
+                data: updateData
+            })
+        }
+
+        else {
+            res.status(500).json({
+                success: false,
+                massage: "User not found",
+                error: {
+                    code: 404,
+                    description: "User not found!"
+                }
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            massage: "User not found",
+            error: {
+                code: 404,
+                description: "User not found!"
+            }
+        })
+    }
+}
+//step-5 => user delete
+const deletedSingleSpacificuUser = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.userId;
+        const result = await userServices.singleUserDeleteIntoFormDB(id)
+        if (result.modifiedCount === 1) {
+            res.status(200).json({
+                success: true,
+                massage: "User deleted successfully!",
+                data: null
+            })
+        } else {
+            res.status(500).json({
+                success: false,
+                massage: "User not found!",
+                error: {
+                    code: 404,
+                    description: "User not found!"
+                }
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            massage: "something want wrong",
+            error: error
+        })
+    }
+
+}
 
 export const userControllers = {
     createUser,
     getUserAllUsers,
-    getSIngleSpecificUser
+    getSIngleSpecificUser,
+    updateSpacificUserData,
+    deletedSingleSpacificuUser
 }
