@@ -103,7 +103,38 @@ const updateSpacificUserData = async (req: Request, res: Response) => {
         })
     }
 }
-//step-5 => user delete
+//step-5 => add order
+const addOrderFromDb = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.userId;
+        const data = req.body;
+        const result = await userServices.createOrderDataIntoDB(id, data);
+        if (result.modifiedCount === 1) {
+            res.status(200).json({
+                success: true,
+                massage: "Order created successfully!",
+                data: null
+            })
+        } else {
+            res.status(500).json({
+                success: false,
+                massage: "User not found!",
+                error: {
+                    code: 404,
+                    description: "User not found!"
+                }
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            massage: "something want wrong",
+            error: error
+        })
+    }
+}
+
+//step-6 => user delete
 const deletedSingleSpacificuUser = async (req: Request, res: Response) => {
     try {
         const id = req.params.userId;
@@ -139,5 +170,6 @@ export const userControllers = {
     getUserAllUsers,
     getSIngleSpecificUser,
     updateSpacificUserData,
-    deletedSingleSpacificuUser
+    deletedSingleSpacificuUser,
+    addOrderFromDb
 }

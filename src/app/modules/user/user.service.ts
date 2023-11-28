@@ -1,4 +1,4 @@
-import { TUser } from "./user.interface";
+import { TOrders, TUser } from "./user.interface";
 import { User } from "./user.model";
 //step-1 => user create
 const createUserIntoDB = async (userData: TUser) => {
@@ -37,18 +37,25 @@ const updateUserSpecificIntoDB = async (id: string, updateUser: TUser) => {
     });
     return result
 }
+//step-5 => create an order data
+const createOrderDataIntoDB = async (id: string, createOrder: TOrders) => {
+    const result = await User.updateOne({ userId: id }, { $push: { orders: createOrder } });
+    return result
+}
 
-//step-5 => single user deleted data
+//step-6 => single user deleted data
 const singleUserDeleteIntoFormDB = async (id: string) => {
-    console.log(id);
     const result = await User.updateOne({ userId: id }, { $set: { isDeleted: true } })
     return result
 }
+
+
 
 export const userServices = {
     createUserIntoDB,
     getAllUsersIntoDB,
     getSingleSpecificUserIntoDB,
     updateUserSpecificIntoDB,
-    singleUserDeleteIntoFormDB
+    singleUserDeleteIntoFormDB,
+    createOrderDataIntoDB
 }
