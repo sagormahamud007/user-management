@@ -7,7 +7,7 @@ const createUserIntoDB = async (userData: TUser) => {
 }
 //step-2 => get all users data from DB
 const getAllUsersIntoDB = async () => {
-    const result = await User.find({}, { username: 1, fullName: 1, age: 1, email: 1, address: 1, orders: 1 });
+    const result = await User.find({}, { username: 1, fullName: 1, age: 1, email: 1, address: 1 });
     return result
 }
 //step-3 => specific user get from DB
@@ -20,6 +20,7 @@ const getSingleSpecificUserIntoDB = async (userId: string) => {
             fullName: 1,
             age: 1,
             email: 1,
+            isActive: 1,
             address: 1,
             orders: 1
         }
