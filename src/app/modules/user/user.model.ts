@@ -38,7 +38,8 @@ export const userSchema = new Schema<TUser>({
     isActive: { type: Boolean, required: true },
     hobbies: [{ type: String, required: true }],
     address: { type: userAddressSchema, required: true },
-    orders: { type: [ordersSchema] || undefined }
+    orders: { type: [ordersSchema] || undefined },
+    isDeleted: { type: Boolean, default: false }
 })
 
 userSchema.pre('save', async function (next) {

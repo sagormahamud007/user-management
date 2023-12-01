@@ -31,7 +31,8 @@ const userValidationSchema = z.object({
     address: TAddressSchema.refine(value => !!value.street || !!value.city || !!value.country, {
         message: "At least one of the first street, city or quantity is required"
     }),
-    orders: z.array(TOrdersSchema).optional()
+    orders: z.array(TOrdersSchema).optional(),
+    isDeleted: z.boolean().default(false)
 })
 
 

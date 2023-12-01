@@ -30,7 +30,6 @@ const createUser = async (req: Request, res: Response) => {
         }
     }
 }
-
 //step-2 => Get all users data
 const getUserAllUsers = async (req: Request, res: Response) => {
     try {
@@ -48,7 +47,6 @@ const getUserAllUsers = async (req: Request, res: Response) => {
         })
     }
 }
-
 //step-3 => single user get spacific unic ID
 const getSIngleSpecificUser = async (req: Request, res: Response) => {
     try {
@@ -103,38 +101,7 @@ const updateSpacificUserData = async (req: Request, res: Response) => {
         })
     }
 }
-//step-5 => add order
-const addOrderFromDb = async (req: Request, res: Response) => {
-    try {
-        const id = req.params.userId;
-        const data = req.body;
-        const result = await userServices.createOrderDataIntoDB(id, data);
-        if (result.modifiedCount === 1) {
-            res.status(200).json({
-                success: true,
-                massage: "Order created successfully!",
-                data: null
-            })
-        } else {
-            res.status(500).json({
-                success: false,
-                massage: "User not found!",
-                error: {
-                    code: 404,
-                    description: "User not found!"
-                }
-            })
-        }
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            massage: "something want wrong",
-            error: error
-        })
-    }
-}
-
-//step-6 => user delete
+//step-5 => user delete
 const deletedSingleSpacificuUser = async (req: Request, res: Response) => {
     try {
         const id = req.params.userId;
@@ -165,11 +132,67 @@ const deletedSingleSpacificuUser = async (req: Request, res: Response) => {
 
 }
 
+//banus 
+// Add order
+const addOrderFromDb = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.userId;
+        const data = req.body;
+        const result = await userServices.createOrderDataIntoDB(id, data);
+        if (result.modifiedCount === 1) {
+            res.status(200).json({
+                success: true,
+                massage: "Order created successfully!",
+                data: null
+            })
+        } else {
+            res.status(500).json({
+                success: false,
+                massage: "User not found!",
+                error: {
+                    code: 404,
+                    description: "User not found!"
+                }
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            massage: "something want wrong",
+            error: error
+        })
+    }
+}
+//get all order data
+const getAllOrderData = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.userId;
+        const result = await userServices.getAllOrdersDataIntoDB(id);
+        res.status(200).json({
+            success: true,
+            massage: "Users fetched successfully!",
+            data: { orders: result?.orders }
+        })
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            massage: "User not found",
+            error: {
+                code: 404,
+                description: "User not found!"
+            }
+        })
+    }
+}
+
+
+
 export const userControllers = {
     createUser,
     getUserAllUsers,
     getSIngleSpecificUser,
     updateSpacificUserData,
     deletedSingleSpacificuUser,
-    addOrderFromDb
+    addOrderFromDb,
+    getAllOrderData
 }

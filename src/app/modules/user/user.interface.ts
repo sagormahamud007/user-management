@@ -25,5 +25,6 @@ export type TUser = {
     isActive: boolean,
     hobbies: string[],
     address: Taddress,
-    orders?: TOrders[]
+    orders?: TOrders[];
+    isDeleted: boolean;
 }

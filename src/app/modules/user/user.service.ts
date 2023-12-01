@@ -21,8 +21,7 @@ const getSingleSpecificUserIntoDB = async (userId: string) => {
             age: 1,
             email: 1,
             isActive: 1,
-            address: 1,
-            orders: 1
+            address: 1
         }
     );
     return result;
@@ -38,19 +37,24 @@ const updateUserSpecificIntoDB = async (id: string, updateUser: TUser) => {
     });
     return result
 }
-//step-5 => create an order data
-const createOrderDataIntoDB = async (id: string, createOrder: TOrders) => {
-    const result = await User.updateOne({ userId: id }, { $push: { orders: createOrder } });
-    return result
-}
 
-//step-6 => single user deleted data
+//step-5 => single user deleted data
 const singleUserDeleteIntoFormDB = async (id: string) => {
     const result = await User.updateOne({ userId: id }, { $set: { isDeleted: true } })
     return result
 }
 
-
+//bonus
+//create an order data
+const createOrderDataIntoDB = async (id: string, createOrder: TOrders) => {
+    const result = await User.updateOne({ userId: id }, { $push: { orders: createOrder } });
+    return result
+}
+//get all order data
+const getAllOrdersDataIntoDB = async (id: string) => {
+    const result = await User.findOne({ userId: id })
+    return result
+}
 
 export const userServices = {
     createUserIntoDB,
@@ -58,5 +62,6 @@ export const userServices = {
     getSingleSpecificUserIntoDB,
     updateUserSpecificIntoDB,
     singleUserDeleteIntoFormDB,
-    createOrderDataIntoDB
+    createOrderDataIntoDB,
+    getAllOrdersDataIntoDB
 }
