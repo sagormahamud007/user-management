@@ -3,7 +3,17 @@ import { User } from "./user.model";
 //step-1 => user create
 const createUserIntoDB = async (userData: TUser) => {
     const result = await User.create(userData)
-    return result;
+    const resData = {
+        userId: result.userId,
+        username: result.username,
+        fullName: result.fullName,
+        age: result.age,
+        email: result.email,
+        isActive: result.isActive,
+        hobbies: result.hobbies,
+        address: result.address
+    }
+    return resData;
 }
 //step-2 => get all users data from DB
 const getAllUsersIntoDB = async () => {
@@ -21,6 +31,7 @@ const getSingleSpecificUserIntoDB = async (userId: string) => {
             age: 1,
             email: 1,
             isActive: 1,
+            hobbies: 1,
             address: 1
         }
     );

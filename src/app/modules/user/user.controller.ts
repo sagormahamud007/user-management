@@ -13,10 +13,10 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
             data: result
         })
     } catch (error: unknown) {
-        if (error instanceof PromiseRejectionEvent) {
+        if (error) {
             res.status(500).json({
                 success: false,
-                message: error.reason?.message || "Something went wrong",
+                message: error || "Something went wrong",
                 error: error
             })
         }
@@ -36,7 +36,7 @@ const getUserAllUsers = async (req: Request, res: Response, next: NextFunction) 
         const result = await userServices.getAllUsersIntoDB();
         res.status(200).json({
             success: true,
-            massage: "Users fetched successfully!",
+            massage: "User fetched successfully!",
             data: result
         })
 
@@ -57,7 +57,7 @@ const getSIngleSpecificUser = async (req: Request, res: Response, next: NextFunc
         if (result) {
             res.status(200).json({
                 success: true,
-                massage: "Users fetched successfully!",
+                massage: "User fetched successfully!",
                 data: result
             })
         }
