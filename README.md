@@ -47,16 +47,11 @@ It is primarily used for:
         "street": "Singra",
         "city": "Rajshahi",
         "country": "bangladesh"
-    },
-    "orders": [{
-        "productName":"Iphone",
-        "price":80000,
-        "quantity":1
-    }]
+    }
 }
 }
 ```
-# Get data
+# Get all data
 Endpoint : /api/users
 - Response: List of user objects. show the filtering object username, fullName, age, email, address
 ```javascript
@@ -90,7 +85,7 @@ Endpoint : /api/users
 ```javascript
 {
     "success": true,
-    "massage": "Users fetched successfully!",
+    "massage": "User fetched successfully!",
     "data": {
         "_id": "656648e1d011d028663a55c2",
         "userId": 1111,
@@ -108,21 +103,7 @@ Endpoint : /api/users
             "city": "rajshahi",
             "country": "bangladesh",
             "_id": "656648e1d011d028663a55c4"
-        },
-        "orders": [
-            {
-                "productName": "Iphone",
-                "price": 80000,
-                "quantity": 1,
-                "_id": "656648e1d011d028663a55c5"
-            },
-            {
-                "productName": "Honda",
-                "price": 30000,
-                "quantity": 1,
-                "_id": "65664912d011d028663a55c7"
-            }
-        ]
+        }
     }
 }
 ```
@@ -151,21 +132,7 @@ Endpoint : /api/users
             "city": "rajshahi",
             "country": "bangladesh",
             "_id": "656648e1d011d028663a55c4"
-        },
-        "orders": [
-            {
-                "productName": "Iphone",
-                "price": 80000,
-                "quantity": 1,
-                "_id": "656648e1d011d028663a55c5"
-            },
-            {
-                "productName": "Honda",
-                "price": 30000,
-                "quantity": 1,
-                "_id": "65664912d011d028663a55c7"
-            }
-        ]
+        }
     }
 }
 ```
@@ -232,6 +199,30 @@ Endpoint : /api/users
                 "quantity":1
              }
         ]
+    }
+}
+```
+## Calculate Total Price of Orders for a Specific User
+- Endpoint: GET /api/users/:userId/orders/total-price
+- Response : Successfully data
+```javascript
+{
+    "success": true,
+    "message": "Total price calculated successfully!",
+    "data": {
+        "totalPrice": 454.32
+    }
+}
+```
+### 
+If an error occurs, a meaningful error will be displayed
+```javascript
+{
+    "success": false,
+    "message": "User not found",
+    "error": {
+        "code": 404,
+        "description": "User not found!"
     }
 }
 ```
