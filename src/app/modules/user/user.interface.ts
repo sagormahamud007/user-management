@@ -10,9 +10,9 @@ export type TUserFullName = {
     lastName: string
 }
 export type TOrders = {
-    productName?: string;
-    price?: number;
-    quantity?: number;
+    productName: string;
+    price: number;
+    quantity: number;
 }
 
 export type TUser = {
@@ -26,5 +26,5 @@ export type TUser = {
     hobbies: string[],
     address: Taddress,
     orders?: TOrders[];
-    isDeleted: boolean;
+    isDeleted?: boolean;
 }

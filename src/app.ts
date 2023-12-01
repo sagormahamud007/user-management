@@ -16,4 +16,5 @@ app.get('/', (req: Request, res: Response) => {
         message: "Welcome to the API of second assignment"
     })
 });
+
 export default app;

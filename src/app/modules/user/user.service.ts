@@ -55,6 +55,18 @@ const getAllOrdersDataIntoDB = async (id: string) => {
     const result = await User.findOne({ userId: id })
     return result
 }
+//spacific user total price 
+const getUserTotalPrice = async (id: string) => {
+    const result = await User.findOne({ userId: id })
+    return result
+}
+const userOrderTotalPrice = async (array: any) => {
+    const orders = array.orders?.flatMap((order: TOrders) => order)
+    const totalPrice = orders.reduce((accumulator: number, currentItem: TOrders) => {
+        return accumulator + currentItem.price
+    }, 0);
+    return totalPrice
+}
 
 export const userServices = {
     createUserIntoDB,
@@ -63,5 +75,7 @@ export const userServices = {
     updateUserSpecificIntoDB,
     singleUserDeleteIntoFormDB,
     createOrderDataIntoDB,
-    getAllOrdersDataIntoDB
+    getAllOrdersDataIntoDB,
+    getUserTotalPrice,
+    userOrderTotalPrice
 }

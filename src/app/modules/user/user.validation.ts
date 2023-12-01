@@ -11,9 +11,9 @@ const TAddressSchema = z.object({
     country: z.string().min(1).max(20, { message: "Country is required" })
 })
 const TOrdersSchema = z.object({
-    productName: z.string().min(1).max(255, { message: "Product Name is required" }).optional(),
-    price: z.number().min(0, { message: "Price is required" }).optional(),
-    quantity: z.number().min(0, { message: "Quantity is required" }).optional(),
+    productName: z.string().min(1).max(255, { message: "Product Name is required" }),
+    price: z.number().min(0, { message: "Price is required" }),
+    quantity: z.number().min(0, { message: "Quantity is required" }),
 });
 
 const userValidationSchema = z.object({
