@@ -32,12 +32,12 @@ It is primarily used for:
 ```javascript
 {
 "user":{
-    "userId": 2222,
-    "username": "sagorali123",
-    "password": "513023",
+    "userId": 1111,
+    "username": "sagorali51",
+    "password": "!@#qweS123",
     "fullName": {
-        "firstName": "Sagor",
-        "lastName": "Mahmud"
+        "firstName": "Md Sagor",
+        "lastName": "ali"
     },
     "age": 24,
     "email": "sagor@gmail.com",
@@ -46,9 +46,37 @@ It is primarily used for:
     "address": {
         "street": "Singra",
         "city": "Rajshahi",
-        "country": "bangladesh"
+        "country": "Bangladesh"
     }
 }
+}
+```
+## Success Response Data
+```javascript
+{
+    "success": true,
+    "message": "User created successfully!",
+    "data": {
+        "userId": 1111,
+        "username": "sagorali51",
+        "fullName": {
+            "firstName": "Md Sagor",
+            "lastName": "ali",
+            "_id": "6569ebee24f49a2dbce402fc"
+        },
+        "age": 24,
+        "email": "sagor@gmail.com",
+        "isActive": true,
+        "hobbies": [
+            "football"
+        ],
+        "address": {
+            "street": "Singra",
+            "city": "Rajshahi",
+            "country": "Bangladesh",
+            "_id": "6569ebee24f49a2dbce402fd"
+        }
+    }
 }
 ```
 # Get all data
@@ -57,25 +85,26 @@ Endpoint : /api/users
 ```javascript
 {
     "success": true,
-    "massage": "Users fetched successfully!",
+    "massage": "User fetched successfully!",
     "data": [
         {
-            "_id": "656648e1d011d028663a55c2",
-            "username": "sagormaha123",
+            "_id": "6569ebee24f49a2dbce402fb",
+            "username": "sagorali51",
             "fullName": {
-                "firstName": "Sagor",
-                "lastName": "mahmud",
-                "_id": "656648e1d011d028663a55c3"
+                "firstName": "Md Sagor",
+                "lastName": "ali",
+                "_id": "6569ebee24f49a2dbce402fc"
             },
-            "age": 10,
+            "age": 24,
             "email": "sagor@gmail.com",
             "address": {
-                "street": "singra",
-                "city": "rajshahi",
-                "country": "bangladesh",
-                "_id": "656648e1d011d028663a55c4"
+                "street": "Singra",
+                "city": "Rajshahi",
+                "country": "Bangladesh",
+                "_id": "6569ebee24f49a2dbce402fd"
             }
         }
+        //more object...
     ]
 }
 ```
@@ -87,55 +116,78 @@ Endpoint : /api/users
     "success": true,
     "massage": "User fetched successfully!",
     "data": {
-        "_id": "656648e1d011d028663a55c2",
+        "_id": "6569ebee24f49a2dbce402fb",
         "userId": 1111,
-        "username": "sagormaha123",
+        "username": "sagorali51",
         "fullName": {
-            "firstName": "Sagor",
-            "lastName": "mahmud",
-            "_id": "656648e1d011d028663a55c3"
+            "firstName": "Md Sagor",
+            "lastName": "ali",
+            "_id": "6569ebee24f49a2dbce402fc"
         },
-        "age": 10,
+        "age": 24,
         "email": "sagor@gmail.com",
         "isActive": true,
+        "hobbies": [
+            "football"
+        ],
         "address": {
-            "street": "singra",
-            "city": "rajshahi",
-            "country": "bangladesh",
-            "_id": "656648e1d011d028663a55c4"
+            "street": "Singra",
+            "city": "Rajshahi",
+            "country": "Bangladesh",
+            "_id": "6569ebee24f49a2dbce402fd"
         }
     }
 }
 ```
-# Update user
-- Endpoint: PUT : /api/users/:userId
-- Request Body: Updated user data
-### Response: If the User object is updated and the Confirmed Password field is not included in the response data. If the update is done correctly, it will show like this and if not, it will give a meaningful massage
+### 
+If an error occurs, a meaningful error will be displayed
 ```javascript
 {
-    "success": true,
-    "massage": "User updated successfully!",
-    "data": {
-        "_id": "656648e1d011d028663a55c2",
-        "userId": 1111,
-        "username": "sagormaha123",
-        "fullName": {
-            "firstName": "Sagor",
-            "lastName": "mahmud",
-            "_id": "656648e1d011d028663a55c3"
-        },
-        "age": 10,
-        "email": "sagor@gmail.com",
-        "isActive": true,
-        "address": {
-            "street": "singra",
-            "city": "rajshahi",
-            "country": "bangladesh",
-            "_id": "656648e1d011d028663a55c4"
-        }
+    "success": false,
+    "massage": "User not found",
+    "error": {
+        "code": 404,
+        "description": "User not found!"
     }
 }
 ```
+
+# Update user
+- Endpoint: PUT : /api/users/:userId
+- Request Body
+### Response: If the User object is updated and the Confirmed Password field is not included in the response data. If the update is done correctly.
+```javascript
+{
+    "userId": 2222,
+    "username": "sagorali1234",
+    "password": "017432",
+    "fullName": {
+        "firstName": "Sagor",
+        "lastName": "mahmud"
+    },
+    "age": 10,
+    "email": "sagor@gmail.com",
+    "isActive": true,
+    "hobbies": ["football"],
+    "address": {
+        "street": "singra",
+        "city": "rajshahi",
+        "country": "bangladesh"
+    }
+}
+```
+### it will show like this and if not, it will give a meaningful massage
+```javascript
+{
+    "success": false,
+    "massage": "User not found",
+    "error": {
+        "code": 404,
+        "description": "User not found!"
+    }
+}
+```
+
 # Delete a user
 - Endpoint: DELETE /api/users/:userId
 - Response: Success message
