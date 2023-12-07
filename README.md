@@ -31,7 +31,6 @@ It is primarily used for:
 
 ```javascript
 {
-"user":{
     "userId": 1111,
     "username": "sagorali51",
     "password": "!@#qweS123",
@@ -48,7 +47,6 @@ It is primarily used for:
         "city": "Rajshahi",
         "country": "Bangladesh"
     }
-}
 }
 ```
 ## Success Response Data
