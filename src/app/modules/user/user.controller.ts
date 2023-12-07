@@ -4,7 +4,7 @@ import { userServices } from "./user.service";
 //step-1 => create-user data 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { user: userData } = req.body;
+        const userData = req.body;
         const zodParseData = userValidationSchema.parse(userData)
         const result = await userServices.createUserIntoDB(zodParseData)
         res.status(200).json({
